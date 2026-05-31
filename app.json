@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "trucklucro-sdk54",
-    "slug": "trucklucro-sdk54",
+    "name": "TruckLucro",
+    "slug": "trucklucro-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "trucklucrosdk54",
+    "scheme": "trucklucro",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

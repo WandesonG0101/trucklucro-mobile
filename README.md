@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# TruckLucro Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo mobile do TruckLucro criado com Expo SDK 54, React Native, TypeScript e Expo Router.
 
-## Get started
+Slogan: **Dirija sabendo quanto realmente ganha.**
 
-1. Install dependencies
+## Requisitos
 
-   ```bash
-   npm install
-   ```
+- Node.js LTS
+- npm
+- Expo Go no celular para visualizar rapidamente
+- Android Studio opcional para emulador Android
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Instalação
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+No Windows, se o PowerShell bloquear `npm.ps1`, use os comandos com `cmd /c`.
 
-## Learn more
+## Rodar o app
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+cmd /c npm run start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Depois escolha uma opção no terminal do Expo:
 
-## Join the community
+- Escanear o QR Code com Expo Go
+- Pressionar `a` para Android Emulator
+- Pressionar `w` para abrir no navegador
 
-Join our community of developers creating universal apps.
+Para facilitar o acesso pelo celular na mesma rede Wi-Fi:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+cmd /c npm run start:lan
+```
+
+## Scripts úteis
+
+```bash
+cmd /c npm run lint
+cmd /c npm run typecheck
+cmd /c npm run web
+```
+
+## Estrutura principal
+
+```text
+app/
+  (auth)/      Fluxo de login e cadastro
+  (tabs)/      Fluxo principal com menu inferior
+  *.tsx        Telas auxiliares
+
+src/
+  components/  Componentes reutilizáveis
+  data/        Dados mockados
+  theme/       Paleta de cores
+  types/       Tipos TypeScript
+  utils/       Funções utilitárias
+```
+
+## Como colegas podem abrir
+
+Opção rápida, com o computador do desenvolvedor ligado:
+
+1. Rode `cmd /c npm run start:lan`.
+2. O colega instala o Expo Go.
+3. O colega escaneia o QR Code.
+4. Todos precisam estar na mesma rede Wi-Fi.
+
+Opção recomendada para equipe remota:
+
+1. Subir o código no GitHub.
+2. Configurar EAS com uma conta Expo.
+3. Gerar um build preview Android.
+4. Compartilhar o link de instalação com a equipe.
+
+Veja o guia completo em [docs/SHARING.md](docs/SHARING.md).

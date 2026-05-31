@@ -1,14 +1,18 @@
 {
-  "name": "trucklucro-sdk54",
+  "name": "trucklucro-mobile",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
+    "start:lan": "expo start --lan",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "typecheck": "tsc --noEmit",
+    "eas:preview": "eas build --platform android --profile preview",
+    "eas:update:preview": "eas update --branch preview"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
