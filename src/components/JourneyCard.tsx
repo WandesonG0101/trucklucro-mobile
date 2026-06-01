@@ -1,16 +1,18 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 import { colors } from '@/src/theme/colors';
 
 type JourneyCardProps = {
   title: string;
-  icon: keyof typeof Ionicons.glyphMap;
+  icon: keyof typeof Ionicons.glyphMap | keyof typeof FontAwesome5.glyphMap;
+  iconLibrary?: 'ionicons' | 'fontawesome5';
   badge?: string;
   onPress?: () => void;
 };
 
-export function JourneyCard({ title, icon, badge, onPress }: JourneyCardProps) {
+export function JourneyCard({ title, icon, iconLibrary = 'ionicons', badge, onPress }: JourneyCardProps) {
   return (
     <Pressable
       accessibilityRole="button"
@@ -21,7 +23,11 @@ export function JourneyCard({ title, icon, badge, onPress }: JourneyCardProps) {
           <Text style={styles.badgeText}>{badge}</Text>
         </View>
       ) : null}
-      <Ionicons name={icon} size={38} color={colors.text} />
+      {iconLibrary === 'fontawesome5' ? (
+        <FontAwesome5 name={icon as keyof typeof FontAwesome5.glyphMap} size={38} color={colors.text} />
+      ) : (
+        <Ionicons name={icon as keyof typeof Ionicons.glyphMap} size={38} color={colors.text} />
+      )}
       <Text style={styles.title}>{title}</Text>
     </Pressable>
   );

@@ -30,37 +30,43 @@ export default function HomeScreen() {
           <SummaryCard label="Faturamento" value={formatCurrency(revenue)} />
         </View>
 
-        <SectionTitle title="Sua Jornada" />
+        <SectionTitle title="Seu Itinerário" />
         <View style={styles.journeyGrid}>
           <JourneyCard
             title="Fretes Disponíveis"
-            icon="bus-outline"
+            icon="truck"
+            iconLibrary="fontawesome5"
             badge="170"
             onPress={() => router.push('/fretes-disponiveis')}
           />
           <JourneyCard
             title="Tô Vazio"
-            icon="trail-sign-outline"
+            icon="truck-loading"
+            iconLibrary="fontawesome5"
             onPress={() => router.push('/to-vazio')}
           />
           <JourneyCard
             title="Preços Diesel"
-            icon="car-sport-outline"
+            icon="gas-pump"
+            iconLibrary="fontawesome5"
             onPress={() => router.push('/preco-diesel')}
           />
           <JourneyCard
             title="Parceiros TruckLucro"
-            icon="people-outline"
+            icon="handshake"
+            iconLibrary="fontawesome5"
             onPress={() => router.push('/parceiros')}
           />
           <JourneyCard
             title="Calcular Frete"
-            icon="calculator-outline"
+            icon="calculator"
+            iconLibrary="fontawesome5"
             onPress={() => router.push('/calcular-frete')}
           />
           <JourneyCard
             title="Serviços"
-            icon="construct-outline"
+            icon="tools"
+            iconLibrary="fontawesome5"
             onPress={() => router.push('/servicos')}
           />
         </View>

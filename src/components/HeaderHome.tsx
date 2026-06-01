@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colors } from '@/src/theme/colors';
+
+const homeHeroImage = require('../../assets/images/trucklucro-hero.png');
 
 type HeaderHomeProps = {
   userName: string;
@@ -13,16 +15,23 @@ type HeaderHomeProps = {
 export function HeaderHome({ userName, truckModel, monthLabel, tripCount }: HeaderHomeProps) {
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.left}>
-          <Text style={styles.greeting}>Olá, {userName}!</Text>
-          <Text style={styles.truck}>{truckModel}</Text>
+      <ImageBackground
+        source={homeHeroImage}
+        style={styles.heroImage}
+        imageStyle={styles.heroImageRadius}
+        resizeMode="cover">
+        <View style={styles.heroOverlay} />
+        <View style={styles.container}>
+          <View style={styles.left}>
+            <Text style={styles.greeting}>Olá, {userName}!</Text>
+            <Text style={styles.truck}>{truckModel}</Text>
+          </View>
+          <View style={styles.right}>
+            <Text style={styles.month}>{monthLabel}</Text>
+            <Text style={styles.trips}>{tripCount} viagens</Text>
+          </View>
         </View>
-        <View style={styles.right}>
-          <Text style={styles.month}>{monthLabel}</Text>
-          <Text style={styles.trips}>{tripCount} viagens</Text>
-        </View>
-      </View>
+      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -31,14 +40,27 @@ const styles = StyleSheet.create({
   safeArea: {
     backgroundColor: colors.primary,
   },
+  heroImage: {
+    height: 128,
+    justifyContent: 'flex-end',
+    overflow: 'hidden',
+    borderRadius: 0,
+    backgroundColor: colors.primaryLight,
+  },
+  heroImageRadius: {
+    borderRadius: 0,
+  },
+  heroOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(43, 33, 24, 0.46)',
+  },
   container: {
-    minHeight: 116,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
     gap: 16,
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingBottom: 12,
   },
   left: {
     flex: 1,
@@ -50,7 +72,7 @@ const styles = StyleSheet.create({
   },
   greeting: {
     color: colors.white,
-    fontSize: 24,
+    fontSize: 23,
     fontWeight: '900',
   },
   truck: {
