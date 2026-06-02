@@ -7,19 +7,25 @@ import { HeaderHome } from '@/src/components/HeaderHome';
 import { JourneyCard } from '@/src/components/JourneyCard';
 import { SectionTitle } from '@/src/components/SectionTitle';
 import { SummaryCard } from '@/src/components/SummaryCard';
+import { useUserProfile } from '@/src/context/UserProfileContext';
 import { colors } from '@/src/theme/colors';
 import { formatCurrency } from '@/src/utils/formatters';
 
 export default function HomeScreen() {
+  const { personalData, vehicleData } = useUserProfile();
   const revenue = 0;
   const profit = 0;
+  const driverName = personalData.fullName || personalData.nickname || 'Motorista';
+  const truckModel =
+    [vehicleData.truckType, vehicleData.brand, vehicleData.model].filter(Boolean).join(' ') || 'Caminhao';
+  const monthLabel = getCurrentMonthLabel();
 
   return (
     <View style={styles.container}>
       <HeaderHome
-        userName="motorista"
-        truckModel="Scania R540"
-        monthLabel="Maio 2026"
+        userName={driverName}
+        truckModel={truckModel}
+        monthLabel={monthLabel}
         tripCount={0}
       />
 
@@ -83,6 +89,15 @@ export default function HomeScreen() {
       </ScrollView>
     </View>
   );
+}
+
+function getCurrentMonthLabel() {
+  const label = new Intl.DateTimeFormat('pt-BR', {
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date());
+
+  return label.charAt(0).toUpperCase() + label.slice(1);
 }
 
 const styles = StyleSheet.create({

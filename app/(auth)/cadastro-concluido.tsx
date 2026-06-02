@@ -1,19 +1,66 @@
+import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useRef } from 'react';
+import { Animated, Easing, StyleSheet, Text } from 'react-native';
 
-import { Button } from '@/src/components/Button';
 import { Screen } from '@/src/components/Screen';
 import { colors } from '@/src/theme/colors';
 
 export default function CadastroConcluidoScreen() {
+  const scale = useRef(new Animated.Value(0.75)).current;
+  const opacity = useRef(new Animated.Value(0)).current;
+  const checkScale = useRef(new Animated.Value(0.4)).current;
+  const checkOpacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.sequence([
+      Animated.parallel([
+        Animated.timing(scale, {
+          toValue: 1,
+          duration: 460,
+          easing: Easing.out(Easing.cubic),
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 260,
+          easing: Easing.out(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ]),
+      Animated.parallel([
+        Animated.spring(checkScale, {
+          toValue: 1,
+          friction: 5,
+          tension: 95,
+          useNativeDriver: true,
+        }),
+        Animated.timing(checkOpacity, {
+          toValue: 1,
+          duration: 180,
+          easing: Easing.out(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ]),
+    ]).start();
+
+    const timeout = setTimeout(() => {
+      router.replace('/(tabs)');
+    }, 1800);
+
+    return () => clearTimeout(timeout);
+  }, [checkOpacity, checkScale, opacity, scale]);
+
   return (
     <Screen contentContainerStyle={styles.content}>
-      <View style={styles.badge}>
-        <Text style={styles.badgeText}>OK</Text>
-      </View>
-      <Text style={styles.title}>Cadastro concluído!</Text>
+      <Animated.View style={[styles.badge, { opacity, transform: [{ scale }] }]}>
+        <Animated.View style={{ opacity: checkOpacity, transform: [{ scale: checkScale }] }}>
+          <Ionicons name="checkmark" size={66} color={colors.white} />
+        </Animated.View>
+      </Animated.View>
+      <Text style={styles.title}>Cadastro concluido!</Text>
       <Text style={styles.subtitle}>Bem-vindo ao TruckLucro.</Text>
-      <Button title="Ir para o início" onPress={() => router.replace('/(tabs)')} />
+      <Text style={styles.redirectText}>Indo para o inicio...</Text>
     </Screen>
   );
 }
@@ -25,17 +72,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   badge: {
-    height: 88,
-    width: 88,
+    height: 96,
+    width: 96,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 44,
+    borderRadius: 48,
     backgroundColor: colors.green,
-  },
-  badgeText: {
-    color: colors.white,
-    fontSize: 28,
-    fontWeight: '900',
   },
   title: {
     color: colors.primary,
@@ -46,6 +88,12 @@ const styles = StyleSheet.create({
   subtitle: {
     color: colors.textMuted,
     fontSize: 18,
+    textAlign: 'center',
+  },
+  redirectText: {
+    color: colors.greenDark,
+    fontSize: 14,
+    fontWeight: '800',
     textAlign: 'center',
   },
 });

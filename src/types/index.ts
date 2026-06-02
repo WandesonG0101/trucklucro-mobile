@@ -64,6 +64,13 @@ export type Partner = {
   name: string;
   category: string;
   benefit: string;
+  description: string;
+  discount: string;
+  region: string;
+  coupon: string;
+  highlight: string;
+  icon: string;
+  color: string;
 };
 
 export type CommunityDieselPrice = {

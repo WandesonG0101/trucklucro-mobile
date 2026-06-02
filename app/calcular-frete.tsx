@@ -107,79 +107,88 @@ export default function CalcularFreteScreen() {
         </Card>
       ) : null}
 
-      <Input
-        label="Valor do frete"
-        placeholder="R$ 0,00"
-        keyboardType="decimal-pad"
-        value={form.freightValue}
-        onChangeText={(value) => updateField('freightValue', value)}
-      />
-      <Input
-        label="Distancia em km"
-        placeholder="0"
-        keyboardType="decimal-pad"
-        value={form.distanceKm}
-        onChangeText={(value) => updateField('distanceKm', value)}
-      />
-      <Input
-        label="Origem"
-        placeholder="Cidade - UF"
-        value={form.origin}
-        onChangeText={(value) => updateField('origin', value)}
-      />
-      <Input
-        label="Destino"
-        placeholder="Cidade - UF"
-        value={form.destination}
-        onChangeText={(value) => updateField('destination', value)}
-      />
-      <Input
-        label="Tipo de carga"
-        placeholder="Ex: Carga Geral"
-        value={form.cargoType}
-        onChangeText={(value) => updateField('cargoType', value)}
-      />
-      <Input
-        label="Tipo de veiculo"
-        placeholder="Ex: Bitrem"
-        value={form.vehicleType}
-        onChangeText={(value) => updateField('vehicleType', value)}
-      />
-      <Input
-        label="Pedagio"
-        placeholder="R$ 0,00"
-        keyboardType="decimal-pad"
-        value={form.toll}
-        onChangeText={(value) => updateField('toll', value)}
-      />
-      <Input
-        label="Consumo medio do caminhao"
-        placeholder="Km por litro"
-        keyboardType="decimal-pad"
-        value={form.averageConsumption}
-        onChangeText={(value) => updateField('averageConsumption', value)}
-      />
-      <Input
-        label="Preco do diesel"
-        placeholder="R$ por litro"
-        keyboardType="decimal-pad"
-        value={form.dieselPrice}
-        onChangeText={(value) => updateField('dieselPrice', value)}
-      />
-      <Input
-        label="Alimentacao"
-        placeholder="R$ 0,00"
-        keyboardType="decimal-pad"
-        value={form.food}
-        onChangeText={(value) => updateField('food', value)}
-      />
-      <Input
-        label="Outros custos"
-        placeholder="R$ 0,00"
-        keyboardType="decimal-pad"
-        value={form.otherCosts}
-        onChangeText={(value) => updateField('otherCosts', value)}
-      />
+      <Card style={styles.formSection}>
+        <Text style={styles.sectionTitle}>Dados da viagem</Text>
+        <Text style={styles.sectionDescription}>Informe rota, carga e valor negociado do frete.</Text>
+        <Input
+          label="Valor do frete"
+          placeholder="R$ 0,00"
+          keyboardType="decimal-pad"
+          value={form.freightValue}
+          onChangeText={(value) => updateField('freightValue', value)}
+        />
+        <Input
+          label="Distancia em km"
+          placeholder="0"
+          keyboardType="decimal-pad"
+          value={form.distanceKm}
+          onChangeText={(value) => updateField('distanceKm', value)}
+        />
+        <Input
+          label="Origem"
+          placeholder="Cidade - UF"
+          value={form.origin}
+          onChangeText={(value) => updateField('origin', value)}
+        />
+        <Input
+          label="Destino"
+          placeholder="Cidade - UF"
+          value={form.destination}
+          onChangeText={(value) => updateField('destination', value)}
+        />
+        <Input
+          label="Tipo de carga"
+          placeholder="Ex: Carga Geral"
+          value={form.cargoType}
+          onChangeText={(value) => updateField('cargoType', value)}
+        />
+        <Input
+          label="Pedagio"
+          placeholder="R$ 0,00"
+          keyboardType="decimal-pad"
+          value={form.toll}
+          onChangeText={(value) => updateField('toll', value)}
+        />
+      </Card>
+
+      <Card style={styles.formSection}>
+        <Text style={styles.sectionTitle}>Dados do veiculo e custos</Text>
+        <Text style={styles.sectionDescription}>Preencha consumo, diesel e despesas da viagem.</Text>
+        <Input
+          label="Tipo de veiculo"
+          placeholder="Ex: Bitrem"
+          value={form.vehicleType}
+          onChangeText={(value) => updateField('vehicleType', value)}
+        />
+        <Input
+          label="Consumo medio do caminhao"
+          placeholder="Km por litro"
+          keyboardType="decimal-pad"
+          value={form.averageConsumption}
+          onChangeText={(value) => updateField('averageConsumption', value)}
+        />
+        <Input
+          label="Preco do diesel"
+          placeholder="R$ por litro"
+          keyboardType="decimal-pad"
+          value={form.dieselPrice}
+          onChangeText={(value) => updateField('dieselPrice', value)}
+        />
+        <Input
+          label="Alimentacao"
+          placeholder="R$ 0,00"
+          keyboardType="decimal-pad"
+          value={form.food}
+          onChangeText={(value) => updateField('food', value)}
+        />
+        <Input
+          label="Outros custos"
+          placeholder="R$ 0,00"
+          keyboardType="decimal-pad"
+          value={form.otherCosts}
+          onChangeText={(value) => updateField('otherCosts', value)}
+        />
+      </Card>
       <Button title="Calcular" onPress={handleCalculate} />
 
       {result ? (
@@ -333,6 +342,20 @@ const styles = StyleSheet.create({
     color: colors.danger,
     fontSize: 13,
     fontWeight: '800',
+    lineHeight: 19,
+  },
+  formSection: {
+    gap: 12,
+  },
+  sectionTitle: {
+    color: colors.text,
+    fontSize: 18,
+    fontWeight: '900',
+  },
+  sectionDescription: {
+    color: colors.textMuted,
+    fontSize: 13,
+    fontWeight: '700',
     lineHeight: 19,
   },
   resultCard: {

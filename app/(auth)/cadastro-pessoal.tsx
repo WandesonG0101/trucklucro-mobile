@@ -6,16 +6,40 @@ import { Button } from '@/src/components/Button';
 import { Header } from '@/src/components/Header';
 import { Input } from '@/src/components/Input';
 import { Screen } from '@/src/components/Screen';
+import { useUserProfile } from '@/src/context/UserProfileContext';
 import { colors } from '@/src/theme/colors';
 
 export default function CadastroPessoalScreen() {
   const [accepted, setAccepted] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [nickname, setNickname] = useState('');
+  const { updatePersonalData } = useUserProfile();
+
+  function handleContinue() {
+    updatePersonalData({
+      fullName: fullName.trim(),
+      nickname: nickname.trim(),
+    });
+    router.push('/cadastro-veiculo');
+  }
 
   return (
     <Screen>
       <Header title="Dados pessoais" subtitle="Conte o basico para personalizar sua experiencia." />
-      <Input label="Nome completo" placeholder="Seu nome" autoCapitalize="words" />
-      <Input label="Apelido opcional" placeholder="Como quer ser chamado?" autoCapitalize="words" />
+      <Input
+        label="Nome completo"
+        placeholder="Seu nome"
+        autoCapitalize="words"
+        value={fullName}
+        onChangeText={setFullName}
+      />
+      <Input
+        label="Apelido opcional"
+        placeholder="Como quer ser chamado?"
+        autoCapitalize="words"
+        value={nickname}
+        onChangeText={setNickname}
+      />
       <Input label="CPF" placeholder="000.000.000-00" keyboardType="number-pad" />
       <Input label="Como conheceu o TruckLucro?" placeholder="Indique o canal ou amigo" />
       <Input label="Codigo de convite opcional" placeholder="Ex: TRUCK10" autoCapitalize="characters" />
@@ -30,7 +54,7 @@ export default function CadastroPessoalScreen() {
       <Button
         title="Continuar"
         disabled={!accepted}
-        onPress={() => router.push('/cadastro-veiculo')}
+        onPress={handleContinue}
       />
     </Screen>
   );

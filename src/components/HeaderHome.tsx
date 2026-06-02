@@ -21,10 +21,18 @@ export function HeaderHome({ userName, truckModel, monthLabel, tripCount }: Head
         imageStyle={styles.heroImageRadius}
         resizeMode="cover">
         <View style={styles.heroOverlay} />
+
+        <View style={styles.topRow}>
+          <Text style={styles.driverName} numberOfLines={1}>
+            {userName}
+          </Text>
+        </View>
+
         <View style={styles.container}>
           <View style={styles.left}>
-            <Text style={styles.greeting}>Olá, {userName}!</Text>
-            <Text style={styles.truck}>{truckModel}</Text>
+            <Text style={styles.truck} numberOfLines={1}>
+              {truckModel}
+            </Text>
           </View>
           <View style={styles.right}>
             <Text style={styles.month}>{monthLabel}</Text>
@@ -54,6 +62,12 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(43, 33, 24, 0.46)',
   },
+  topRow: {
+    position: 'absolute',
+    top: 12,
+    left: 20,
+    right: 20,
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'flex-end',
@@ -70,10 +84,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     gap: 6,
   },
-  greeting: {
+  driverName: {
     color: colors.white,
-    fontSize: 23,
+    fontSize: 22,
     fontWeight: '900',
+    lineHeight: 27,
   },
   truck: {
     color: colors.white,
