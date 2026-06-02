@@ -13,12 +13,14 @@ export default function CadastroPessoalScreen() {
   const [accepted, setAccepted] = useState(false);
   const [fullName, setFullName] = useState('');
   const [nickname, setNickname] = useState('');
+  const [invitationCode, setInvitationCode] = useState('');
   const { updatePersonalData } = useUserProfile();
 
   function handleContinue() {
     updatePersonalData({
       fullName: fullName.trim(),
       nickname: nickname.trim(),
+      invitationCode: invitationCode.trim() || 'TRUCKLUCRO10',
     });
     router.push('/cadastro-veiculo');
   }
@@ -42,7 +44,13 @@ export default function CadastroPessoalScreen() {
       />
       <Input label="CPF" placeholder="000.000.000-00" keyboardType="number-pad" />
       <Input label="Como conheceu o TruckLucro?" placeholder="Indique o canal ou amigo" />
-      <Input label="Codigo de convite opcional" placeholder="Ex: TRUCK10" autoCapitalize="characters" />
+      <Input
+        label="Codigo de convite opcional"
+        placeholder="Ex: TRUCK10"
+        autoCapitalize="characters"
+        value={invitationCode}
+        onChangeText={setInvitationCode}
+      />
 
       <Pressable style={styles.checkboxRow} onPress={() => setAccepted((current) => !current)}>
         <View style={[styles.checkbox, accepted && styles.checkboxChecked]}>

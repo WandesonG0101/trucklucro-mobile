@@ -11,6 +11,9 @@ export default function CadastroVeiculoScreen() {
   const [truckType, setTruckType] = useState('');
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
+  const [year, setYear] = useState('');
+  const [plate, setPlate] = useState('');
+  const [capacity, setCapacity] = useState('');
   const { updateVehicleData } = useUserProfile();
 
   function handleFinish() {
@@ -18,6 +21,9 @@ export default function CadastroVeiculoScreen() {
       truckType: truckType.trim(),
       brand: brand.trim(),
       model: model.trim(),
+      year: year.trim(),
+      plate: plate.trim(),
+      capacity: capacity.trim(),
     });
     router.push('/cadastro-concluido');
   }
@@ -43,12 +49,20 @@ export default function CadastroVeiculoScreen() {
         value={model}
         onChangeText={setModel}
       />
-      <Input label="Ano" placeholder="2020" keyboardType="number-pad" />
-      <Input label="Placa opcional" placeholder="ABC1D23" autoCapitalize="characters" />
+      <Input label="Ano" placeholder="2020" keyboardType="number-pad" value={year} onChangeText={setYear} />
+      <Input
+        label="Placa opcional"
+        placeholder="ABC1D23"
+        autoCapitalize="characters"
+        value={plate}
+        onChangeText={setPlate}
+      />
       <Input
         label="Capacidade aproximada de carga opcional"
         placeholder="Ex: 14 toneladas"
         keyboardType="decimal-pad"
+        value={capacity}
+        onChangeText={setCapacity}
       />
       <Button title="Finalizar cadastro" onPress={handleFinish} />
     </Screen>

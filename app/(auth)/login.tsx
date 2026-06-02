@@ -5,12 +5,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from '@/src/components/Button';
 import { Input } from '@/src/components/Input';
+import { useUserProfile } from '@/src/context/UserProfileContext';
 import { colors } from '@/src/theme/colors';
 
 const heroImage = require('@/assets/images/trucklucro-hero.png');
 
 export default function LoginScreen() {
   const [phone, setPhone] = useState('');
+  const { updatePersonalData } = useUserProfile();
+
+  function handleSendCode() {
+    updatePersonalData({ phone: phone.trim() });
+    router.push('/codigo');
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -48,7 +55,7 @@ export default function LoginScreen() {
               value={phone}
               onChangeText={setPhone}
             />
-            <Button title="Enviar codigo" variant="secondary" onPress={() => router.push('/codigo')} />
+            <Button title="Enviar codigo" variant="secondary" onPress={handleSendCode} />
             <Text style={styles.helperText}>
               Entraremos com seu numero apenas para confirmar seu acesso.
             </Text>
