@@ -6,6 +6,18 @@ export type Trip = {
   revenue: number;
   cost: number;
   distanceKm: number;
+  carrierName?: string;
+  vehicleType?: string;
+  vehicleModel?: string;
+  cargoType?: string;
+  expenses?: TripExpense[];
+};
+
+export type TripExpense = {
+  id: string;
+  category: string;
+  description: string;
+  value: number;
 };
 
 export type Freight = {
